@@ -11,12 +11,7 @@ output:
 Homerun Totals by Month
 
 ```{r fig.width=15 , fig.height= 10}
-#tinytex::install_tinytex()
-#install.packages("tidyr")
-#install.packages("dplyr")
-#install.packages("ggplot2")
-#install.packages("readxl")
-#install.packages("ggpubr")
+
 library("tidyr")
 library("dplyr")
 library("ggplot2")
