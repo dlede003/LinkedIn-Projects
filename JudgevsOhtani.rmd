@@ -1,0 +1,72 @@
+---
+title: "Judge vs Ohtani"
+author: "Daniel Ledesma"
+date: "2023-07-05"
+output:
+  html_document: default
+  pdf_document: default
+  
+---
+
+Homerun Totals by Month
+
+```{r fig.width=15 , fig.height= 10}
+#tinytex::install_tinytex()
+#install.packages("tidyr")
+#install.packages("dplyr")
+#install.packages("ggplot2")
+#install.packages("readxl")
+#install.packages("ggpubr")
+library("tidyr")
+library("dplyr")
+library("ggplot2")
+library("readxl")
+library("ggpubr")
+
+bymonthsplits = read_excel("JudgevsOhtani.xlsx", sheet="ByMonth") 
+head(bymonthsplits)
+
+monthsplitsHR<-ggplot(bymonthsplits, aes(x = reorder(factor(Split), +MonthIndex), y = HR,fill=Batter)) + 
+  geom_bar(stat = "identity",position = "dodge")+ggtitle("HR Totals by Month: \nJudge (2022) vs Ohtani (2023)")+geom_text(aes(label=HR),vjust=-.5, hjust=0.5, size=3.5,position = position_dodge(width = 1))+
+  xlab("Month")+ylab("HR Total")+scale_fill_manual(values = c("navyblue","red"))
+
+monthsplitsBA<-ggplot(bymonthsplits, aes(x = reorder(factor(Split), +MonthIndex), y = BA,fill=Batter)) + 
+  geom_bar(stat = "identity",position = "dodge")+ggtitle("Batting Avg. by Month: \nJudge (2022) vs Ohtani (2023)")+geom_text(aes(label=BA),vjust=-.5, hjust=0.5, size=3.5,position = position_dodge(width = 1))+
+  xlab("Month")+ylab("Batting Avg.")+scale_fill_manual(values = c("navyblue","red"))
+
+monthsplitsOBP<-ggplot(bymonthsplits, aes(x = reorder(factor(Split), +MonthIndex), y = OBP,fill=Batter)) + 
+  geom_bar(stat = "identity",position = "dodge")+ggtitle("OBP by Month: \nJudge (2022) vs Ohtani (2023)")+geom_text(aes(label=OBP),vjust=-.5, hjust=0.5, size=3.5,position = position_dodge(width = 1))+
+  xlab("Month")+ylab("OBP")+scale_fill_manual(values = c("navyblue","red"))
+
+
+
+monthsplitsSLG<-ggplot(bymonthsplits, aes(x = reorder(factor(Split), +MonthIndex), y = SLG,fill=Batter)) + 
+  geom_bar(stat = "identity",position = "dodge")+ggtitle("SLG by Month: \nJudge (2022) vs Ohtani (2023)")+geom_text(aes(label=SLG),vjust=-.5, hjust=0.5, size=3.5,position = position_dodge(width = 1))+
+  xlab("Month")+ylab("SLG")+scale_fill_manual(values = c("navyblue","red"))
+
+
+
+allgraphs<-ggarrange(monthsplitsHR,monthsplitsBA,monthsplitsOBP,monthsplitsSLG,
+          labels = c("A", "B","C","D"),
+          ncol = 2, nrow = 2,widths = c(2, 2))
+allgraphs
+
+ggsave("Judge2022vsOhtani2023.png")
+
+```
+
+
+Homerun Totals by Half
+
+```{r}
+
+
+halfsplits<-ggplot(byhalfsplits, aes(x = factor(Split), y = HR,fill=Batter)) + 
+  geom_bar(stat = "identity",position = "dodge")+ggtitle("First/Second Half Splits: \nJudge (2022) vs Ohtani (2023)") +geom_text(aes(label=HR),vjust=-.5, hjust=0.5, size=3.5,position = position_dodge(width = 1))+
+  xlab("Half")+ylab("HR Total")+scale_fill_manual(values = c("navyblue","red"))
+halfsplits
+
+```
+
+
+
