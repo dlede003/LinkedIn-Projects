@@ -4,7 +4,7 @@ library("readxl")
 library("highcharter")
 library("plotly")
 
-setwd("C:/Users/danie/Documents/YankeesProject")
+#setwd("C:/Users/danie/Documents/YankeesProject")
 
 Yankees <- read_excel("C:/Users/danie/Documents/YankeesProject/YankeesWLRecords.xlsx", sheet = "Stats")
 Ranks <- read_excel("C:/Users/danie/Documents/YankeesProject/YankeesWLRecords.xlsx",sheet = "Ranks") 
